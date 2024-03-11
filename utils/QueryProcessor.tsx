@@ -11,6 +11,5 @@ export default function QueryProcessor(query: string): string {
       "abcdefg"
     );
   }
-
   return "";
 }
