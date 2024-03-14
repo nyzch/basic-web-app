@@ -56,6 +56,25 @@ export default function QueryProcessor(query: string): string {
     if (sixthPowers.length === 0) {
       return "";
     }
+    if (sixthPowers.length === 1) {
+      return sixthPowers[0].toString();
+    }
+    return sixthPowers.join(", ");
+  }
+  if (query.toLowerCase().includes("minus")) {
+    const cleanedString = query.replace(/[^0-9 ]/g, " ").trim();
+    const valuesArray = cleanedString.split(/\s+/).filter(Boolean); // Split on any amount of whitespace and remove empty strings
+    const intArray = valuesArray
+        .map((value) => parseInt(value, 10))
+        .filter((value) => !isNaN(value)); // Convert to integers and filter out NaN values
+    const isSixthPower = (n:number) => {
+      const sixthRoot = Math.pow(n, 1/6);
+      return sixthRoot === Math.floor(sixthRoot);
+    };
+    const sixthPowers = intArray.filter(isSixthPower)
+    if (sixthPowers.length === 0) {
+      return "";
+    }
     return sixthPowers.join(", ");
   }
   return "";
