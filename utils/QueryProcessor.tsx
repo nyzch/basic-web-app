@@ -32,5 +32,15 @@ export default function QueryProcessor(query: string): string {
     const sum = intArray.reduce((accumulator, currentValue) => accumulator + currentValue, 0);
     return sum.toString();
   }
+  if (query.toLowerCase().includes("multipl")) {
+    const cleanedString = query.replace(/[^0-9 ]/g, " ").trim();
+    const valuesArray = cleanedString.split(/\s+/).filter(Boolean); // Split on any amount of whitespace and remove empty strings
+    const intArray = valuesArray
+        .map((value) => parseInt(value, 10))
+        .filter((value) => !isNaN(value)); // Convert to integers and filter out NaN values
+
+    const ans = intArray.length > 0 ? intArray[0] * intArray[1] : "No numbers found";
+    return ans.toString();
+  }
   return "";
 }
