@@ -42,5 +42,18 @@ export default function QueryProcessor(query: string): string {
     const ans = intArray.reduce((accumulator, currentValue) => accumulator * currentValue, 1);
     return ans.toString();
   }
+  if (query.toLowerCase().includes("both a square and a cube")) {
+    const cleanedString = query.replace(/[^0-9 ]/g, " ").trim();
+    const valuesArray = cleanedString.split(/\s+/).filter(Boolean); // Split on any amount of whitespace and remove empty strings
+    const intArray = valuesArray
+        .map((value) => parseInt(value, 10))
+        .filter((value) => !isNaN(value)); // Convert to integers and filter out NaN values
+    const isSixthPower = (n:number) => {
+      const sixthRoot = Math.pow(n, 1/6);
+      return sixthRoot === Math.floor(sixthRoot);
+    };
+    const sixthPowers = intArray.filter(isSixthPower).join(", ");
+    return sixthPowers; // Returns the string
+  }
   return "";
 }
