@@ -32,7 +32,7 @@ export default function QueryProcessor(query: string): string {
     const sum = intArray.reduce((accumulator, currentValue) => accumulator + currentValue, 0);
     return sum.toString();
   }
-  if (query.toLowerCase().includes("multipl")) {
+  if (query.toLowerCase().includes("multiplied")) {
     const cleanedString = query.replace(/[^0-9 ]/g, " ").trim();
     const valuesArray = cleanedString.split(/\s+/).filter(Boolean); // Split on any amount of whitespace and remove empty strings
     const intArray = valuesArray
