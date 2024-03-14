@@ -39,7 +39,7 @@ export default function QueryProcessor(query: string): string {
         .map((value) => parseInt(value, 10))
         .filter((value) => !isNaN(value)); // Convert to integers and filter out NaN values
 
-    const ans = intArray.length > 0 ? intArray[0] * intArray[1] : "No numbers found";
+    const ans = intArray.reduce((accumulator, currentValue) => accumulator * currentValue, 1);
     return ans.toString();
   }
   return "";
