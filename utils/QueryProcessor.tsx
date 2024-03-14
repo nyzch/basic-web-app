@@ -23,7 +23,7 @@ export default function QueryProcessor(query: string): string {
     return maxNum.toString();
   }
   if (query.toLowerCase().includes("plus")) {
-    const cleanedString = query.replace(/[^0-9]/g, " ").trim();
+    const cleanedString = query.replace(/[^0-9 ]/g, " ").trim();
     const valuesArray = cleanedString.split(/\s+/).filter(Boolean); // Split on any amount of whitespace and remove empty strings
     const intArray = valuesArray
         .map((value) => parseInt(value, 10))
