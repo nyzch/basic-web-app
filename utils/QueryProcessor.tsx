@@ -76,11 +76,14 @@ export default function QueryProcessor(query: string): string {
     const intArray = valuesArray
         .map((value) => parseInt(value, 10))
         .filter((value) => !isNaN(value)); // Convert to integers and filter out NaN values
-    const isSixthPower = (n:number) => {
-      const sixthRoot = Math.pow(n, 1/6);
-      return sixthRoot === Math.floor(sixthRoot);
+    const isPrime = (num:number) => {
+      if (num <= 1) return false; // 0 and 1 are not prime numbers
+      for (let i = 2; i <= Math.sqrt(num); i++) {
+        if (num % i === 0) return false; // If divisible by any number other than 1 and itself
+      }
+      return true; // The number is prime
     };
-    const sixthPowers = intArray.filter(isSixthPower)
+    const sixthPowers = intArray.filter(isPrime)
     if (sixthPowers.length === 0) {
       return "";
     }
