@@ -61,7 +61,16 @@ export default function QueryProcessor(query: string): string {
     }
     return sixthPowers.join(", ");
   }
-  if (query.toLowerCase().includes("minus")) {
+  if (query.toLowerCase().includes("power")) {
+    const cleanedString = query.replace(/[^0-9 ]/g, " ").trim();
+    const valuesArray = cleanedString.split(/\s+/).filter(Boolean); // Split on any amount of whitespace and remove empty strings
+    const intArray = valuesArray
+        .map((value) => parseInt(value, 10))
+        .filter((value) => !isNaN(value)); // Convert to integers and filter out NaN values
+    const ans = Math.pow(intArray[0], intArray[1]);
+    return ans.toString();
+  }
+  if (query.toLowerCase().includes("primes")) {
     const cleanedString = query.replace(/[^0-9 ]/g, " ").trim();
     const valuesArray = cleanedString.split(/\s+/).filter(Boolean); // Split on any amount of whitespace and remove empty strings
     const intArray = valuesArray
@@ -74,6 +83,9 @@ export default function QueryProcessor(query: string): string {
     const sixthPowers = intArray.filter(isSixthPower)
     if (sixthPowers.length === 0) {
       return "";
+    }
+    if (sixthPowers.length === 1) {
+      return sixthPowers[0].toString();
     }
     return sixthPowers.join(", ");
   }
