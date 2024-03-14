@@ -52,8 +52,11 @@ export default function QueryProcessor(query: string): string {
       const sixthRoot = Math.pow(n, 1/6);
       return sixthRoot === Math.floor(sixthRoot);
     };
-    const sixthPowers = intArray.filter(isSixthPower).join(", ");
-    return sixthPowers; // Returns the string
+    const sixthPowers = intArray.filter(isSixthPower)
+    if (sixthPowers.length === 0) {
+      return "";
+    }
+    return sixthPowers.join(", ");
   }
   return "";
 }
