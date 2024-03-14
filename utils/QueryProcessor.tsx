@@ -11,10 +11,26 @@ export default function QueryProcessor(query: string): string {
       "abcdefg"
     );
   }
-  if (query.toLowerCase().includes("name")) {
-    return (
-      "nz2"
-    );
+  // used ChatGPT below here
+  if (query.toLowerCase().includes("largest")) {
+    const cleanedString = query.replace(/[^0-9 ]/g, '').trim(); // Keep spaces between numbers
+    const valuesArray = cleanedString.split(/\s+/); // Split by one or more spaces
+    const intArray = valuesArray
+      .map((value) => parseInt(value, 10))
+      .filter((value) => !isNaN(value)); // Filter out NaN values
+
+    const maxNum = intArray.length > 0 ? Math.max(...intArray) : "No numbers found";
+    return maxNum.toString();
+  }
+  if (query.toLowerCase().includes("plus")) {
+    const cleanedString = query.replace(/[^0-9]/g, " ").trim();
+    const valuesArray = cleanedString.split(/\s+/).filter(Boolean); // Split on any amount of whitespace and remove empty strings
+    const intArray = valuesArray
+        .map((value) => parseInt(value, 10))
+        .filter((value) => !isNaN(value)); // Convert to integers and filter out NaN values
+
+    const sum = intArray.reduce((accumulator, currentValue) => accumulator + currentValue, 0);
+    return sum.toString();
   }
   return "";
 }
